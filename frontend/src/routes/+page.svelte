@@ -2,6 +2,9 @@
     import { Select, Button, ImagePlaceholder } from "flowbite-svelte";
     //import { Button } from "@edde746/flowbite-svelte";
     // flowbite datepicker
+
+    import { get } from "$lib/utils.js";
+
     let fyear;
     let fmonth;
     let fday;
@@ -66,6 +69,13 @@
         { value: "30", name: "30" },
         { value: "31", name: "31" },
     ];
+
+    async function plot() {
+        let result = await get(
+            `/plot?fyear=${fyear}&fmonth=${fmonth}&fday=${fday}&uyear=${uyear}&umonth=${umonth}&uday=${uday}`
+        );
+        document.location.href = `/result/${result.task_id}`;
+    }
 </script>
 
 <div class="mx-4 pb-5 text-center">
@@ -89,6 +99,7 @@
 
     <div class="mt-4 items-center">
         <Button gradient color="greenToBlue">Enter</Button>
+
         <!--
         <Button outline={true} gradientDuoTone="greenToBlue">Enter</Button>
         -->
@@ -99,9 +110,15 @@
         sm:px-20 md:px-32 lg:px-40 xl:px-52 2xl:px-60
     items-center"
     >
-        <ImagePlaceholder class="h-screen" />
         <!--
-        <img src="example_image.svg" class="h-screen" alt="example_image" />
+        <ImagePlaceholder class="h-screen" />
+    -->
+        <p class="font-mono text-xl">Example image</p>
+
+        <!--
+<img src="example_image.svg" class="h-screen" alt="example_image" />
+
+        1007 609
         -->
     </div>
 </div>
